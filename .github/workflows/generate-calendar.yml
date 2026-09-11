@@ -1,10 +1,9 @@
 name: Generate calendar
 
 on:
-  schedule:
-    # 00:05 Vietnam time (UTC+7)
-    - cron: "5 17 * * *"
   workflow_dispatch:
+  schedule:
+    - cron: '5 17 * * *'
 
 permissions:
   contents: write
@@ -20,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: '3.12'
 
       - name: Install lunar calendar library
         run: pip install -r requirements.txt
@@ -30,8 +29,8 @@ jobs:
 
       - name: Commit generated calendar
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add today.json
-          git diff --cached --quiet || git commit -m "Update calendar data"
+          git diff --cached --quiet || git commit -m 'Update calendar data'
           git push
