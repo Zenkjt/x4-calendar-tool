@@ -1,0 +1,77 @@
+name: Update owner information
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Owner name (leave blank to keep current)"
+        required: false
+        type: string
+      phone:
+        description: "Phone (leave blank to keep current)"
+        required: false
+        type: string
+      email:
+        description: "Email (leave blank to keep current)"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Update owner.json
+        env:
+          OWNER_NAME: ${{ inputs.name }}
+          OWNER_PHONE: ${{ inputs.phone }}
+          OWNER_EMAIL: ${{ inputs.email }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          path = Path("config/owner.json")
+          current = json.loads(path.read_text(encoding="utf-8"))
+
+          updates = {
+              "name": os.environ.get("OWNER_NAME", "").strip(),
+              "phone": os.environ.get("OWNER_PHONE", "").strip(),
+              "email": os.environ.get("OWNER_EMAIL", "").strip(),
+          }
+
+          for key, value in updates.items():
+              if value:
+                  current[key] = value
+
+          path.write_text(
+              json.dumps(current, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8"
+          )
+          PY
+
+      - name: Install lunar calendar library
+        run: pip install -r requirements.txt
+
+      - name: Regenerate today.json
+        run: python scripts/generate_calendar.py
+
+      - name: Commit owner and calendar data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/owner.json today.json
+          git diff --cached --quiet || git commit -m "Update owner information"
+          git push
