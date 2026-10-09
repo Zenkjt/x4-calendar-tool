@@ -1,12 +1,12 @@
 {
-  "date": "2026-10-09",
+  "date": "2026-10-10",
   "calendar": {
-    "day": 9,
+    "day": 10,
     "month": 10,
-    "weekday": 5,
-    "weekday_text": "THỨ SÁU",
-    "lunar_day": 29,
-    "lunar_month": 8
+    "weekday": 6,
+    "weekday_text": "THỨ BẢY",
+    "lunar_day": 1,
+    "lunar_month": 9
   },
   "owner": {
     "name": "Máy đọc sách này",
