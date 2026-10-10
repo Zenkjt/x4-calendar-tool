@@ -1,11 +1,11 @@
 {
-  "date": "2026-10-10",
+  "date": "2026-10-11",
   "calendar": {
-    "day": 10,
+    "day": 11,
     "month": 10,
-    "weekday": 6,
-    "weekday_text": "THỨ BẢY",
-    "lunar_day": 1,
+    "weekday": 7,
+    "weekday_text": "CHỦ NHẬT",
+    "lunar_day": 2,
     "lunar_month": 9
   },
   "owner": {
