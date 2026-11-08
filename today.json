@@ -1,12 +1,12 @@
 {
-  "date": "2026-11-08",
+  "date": "2026-11-09",
   "calendar": {
-    "day": 8,
+    "day": 9,
     "month": 11,
-    "weekday": 7,
-    "weekday_text": "CHỦ NHẬT",
-    "lunar_day": 30,
-    "lunar_month": 9
+    "weekday": 1,
+    "weekday_text": "THỨ HAI",
+    "lunar_day": 1,
+    "lunar_month": 10
   },
   "owner": {
     "name": "Máy đọc sách này",
